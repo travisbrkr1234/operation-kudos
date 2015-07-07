@@ -1,9 +1,10 @@
-<html>
+<html utf-8>
 <head>
   <title>Support Kudos</title>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <script src="./bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <script src="./bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="./bower_components/core-component-page/core-component-page.html">
+  <!--link rel="import" href="./bower_components/core-ajax/core-ajax.html"-->
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto">
 
     <style>
@@ -47,54 +48,37 @@
         </template>
       </div>
 
-  <script charset="utf-8">
-//colorChange start
-var bg = "#";
-var options = ['125079',  '51A3DC',  '79BE37',  'A05D8E',  '646771']
-
-for (var i = 0 ; i < 1 ; i++) {
-  bg += options[Math.floor(Math.random()*5)];
-}
-document.getElementsByTagName('body')[0].style.background = bg;
-
-//core stuff
-var APP ={ /*AJAX Success Callback Method*/ ajaxCallbackHandler : function(e) {
-  document.querySelector('#messageBody').model = {
-    kudosNow: e.detail.response
-    };
-    console.log(e.detail);
-  }
-}
+      <script charset="utf-8">
+      //core stuff
+      var APP ={ /*AJAX Success Callback Method*/ ajaxCallbackHandler : function(e) {
+        document.querySelector('#messageBody').model = {
+          kudosNow: e.detail.response
+        };
+      }
+    }
     document.addEventListener('polymer-ready', function() {
       var ajax = document.querySelector("#kudosResponse");
       ajax.addEventListener("core-response",APP.ajaxCallbackHandler);
     });
 
-//data request
-/*    var request = new XMLHttpRequest();
+      //colorChange start
+      var bg = "#";
+      var options = ['125079',  '51A3DC',  '79BE37',  'A05D8E',  '646771']
 
-    request.open('GET', 'http://private-b29d2-message5.apiary-mock.com/message
-    ');
+      for (var i = 0 ; i < 1 ; i++) {
+        bg += options[Math.floor(Math.random()*5)];
+      }
+      document.getElementsByTagName('body')[0].style.background = bg;
 
-    request.onreadystatechange = function () {
-      if (this.readyState === 4) {
-        console.log('Status:', this.status);
-        console.log('Headers:', this.getAllResponseHeaders());
-        console.log('Body:', this.responseText);
-    }
-};
-request.send();
-*/
+    //GA stuff
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-//GA stuff
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-64838516-1', 'auto');
+    ga('send', 'pageview');
 
-  ga('create', 'UA-64838516-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+    </script>
 </body>
 </html>
