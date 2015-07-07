@@ -1,0 +1,100 @@
+<html>
+<head>
+  <title>Support Kudos</title>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <script src="./bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="./bower_components/core-component-page/core-component-page.html">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto">
+
+    <style>
+    body {
+        background-color: ;
+      }
+
+    .message {
+      font-family: Roboto;
+      font-size: 7em;
+      margin-top: 1.5em;
+      margin-bottom: auto;
+      margin-left: 0.75em;
+      margin-right: 0.75em;
+      width: auto;
+      height: auto;
+      color: white;
+
+    }
+    .name {
+      margin: 0px 0px 0px 1200px;
+      font-family: Roboto;
+      font-size: 7em;
+      color: white;
+    }
+
+    </style>
+</head>
+<body unresolved>
+  <core-ajax id="kudosResponse"
+    auto
+    url="http://private-b29d2-message5.apiary-mock.com/message"
+    handleAs="json"
+    ></core-ajax>
+      <div>
+        <template id="messageBody" bind="{{kudosNow}}">
+          <template repeat="{{data}}">
+            <div class="message">{{message}}</div>
+            <div class="name">- {{repname}}</div>
+          </template>
+        </template>
+      </div>
+
+  <script charset="utf-8">
+//colorChange start
+var bg = "#";
+var options = ['125079',  '51A3DC',  '79BE37',  'A05D8E',  '646771']
+
+for (var i = 0 ; i < 1 ; i++) {
+  bg += options[Math.floor(Math.random()*5)];
+}
+document.getElementsByTagName('body')[0].style.background = bg;
+
+//core stuff
+var APP ={ /*AJAX Success Callback Method*/ ajaxCallbackHandler : function(e) {
+  document.querySelector('#messageBody').model = {
+    kudosNow: e.detail.response
+    };
+    console.log(e.detail);
+  }
+}
+    document.addEventListener('polymer-ready', function() {
+      var ajax = document.querySelector("#kudosResponse");
+      ajax.addEventListener("core-response",APP.ajaxCallbackHandler);
+    });
+
+//data request
+/*    var request = new XMLHttpRequest();
+
+    request.open('GET', 'http://private-b29d2-message5.apiary-mock.com/message
+    ');
+
+    request.onreadystatechange = function () {
+      if (this.readyState === 4) {
+        console.log('Status:', this.status);
+        console.log('Headers:', this.getAllResponseHeaders());
+        console.log('Body:', this.responseText);
+    }
+};
+request.send();
+*/
+
+//GA stuff
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64838516-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
